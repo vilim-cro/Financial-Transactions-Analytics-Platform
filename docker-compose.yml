@@ -1,4 +1,25 @@
 services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.4.1
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  kafka:
+    image: confluentinc/cp-kafka:7.4.1
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
   postgres:
     build: sources/postgres
     ports:
@@ -10,11 +31,33 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     
-  transactions:
+  transactions_producer:
     build:
       context: sources/transactions
       dockerfile: Dockerfile
-    container_name: transactions
+    container_name: transactions_producer
+    depends_on:
+      - kafka
+    environment:
+      KAFKA_BROKER: kafka:9092
+
+  transactions_consumer:
+    build:
+      context: ingestion/streaming
+      dockerfile: Dockerfile
+    container_name: transactions_consumer
+    depends_on:
+      - kafka
+    environment:
+      KAFKA_BROKER: kafka:9092
+
+  ingest_fx:
+    build:
+      context: ingestion/batch/ingest_fx
+      dockerfile: Dockerfile
+    container_name: ingest_fx
+    environment:
+      FREECURRENCYAPI_API_KEY: ${FREECURRENCYAPI_API_KEY}
 
 volumes:
   pgdata:
