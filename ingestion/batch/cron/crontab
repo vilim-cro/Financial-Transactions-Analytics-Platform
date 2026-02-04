@@ -1,0 +1,6 @@
+# This file is a template - the actual schedule is set dynamically via start-cron.sh
+# based on the INGEST_FX_SCHEDULE environment variable
+# Default: * * * * * (daily at 9 AM UTC)
+
+# Format: minute hour day month weekday command
+# The actual crontab entry is generated at container startup

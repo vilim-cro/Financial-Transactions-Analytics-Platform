@@ -1,12 +1,9 @@
 [project]
-name = "streaming"
+name = "financial-transactions-analytics-platform"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "kafka-python>=2.3.0",
-    "google-cloud-storage>=2.10.0",
-    "pandas>=2.0.0",
-    "pyarrow>=14.0.0",
+    "psycopg2-binary>=2.9.0",
 ]

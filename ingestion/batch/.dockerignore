@@ -1,0 +1,6 @@
+# Exclude from batch-cron build context
+**/.venv
+**/__pycache__
+**/*.pyc
+**/.git
+**/README.md

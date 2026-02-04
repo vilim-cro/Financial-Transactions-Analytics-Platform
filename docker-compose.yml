@@ -23,13 +23,14 @@ services:
   postgres:
     build: sources/postgres
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    command: ["postgres", "-c", "listen_addresses=*", "-c", "wal_level=logical", "-c", "max_replication_slots=10", "-c", "max_wal_senders=10"]
     
   transactions_producer:
     build:
@@ -50,14 +51,38 @@ services:
       - kafka
     environment:
       KAFKA_BROKER: kafka:9092
+      GCS_BUCKET_NAME: ${GCS_BUCKET_NAME}
+      GOOGLE_APPLICATION_CREDENTIALS: ${GOOGLE_APPLICATION_CREDENTIALS}
+    volumes:
+      - ./credentials:/app/credentials:ro
 
-  ingest_fx:
+  # Cron service: runs ingest_fx and update_users in-process on a schedule (no new container per run)
+  batch-cron:
     build:
-      context: ingestion/batch/ingest_fx
-      dockerfile: Dockerfile
-    container_name: ingest_fx
+      context: ingestion/batch
+      dockerfile: cron/Dockerfile
+    container_name: batch-cron
+    depends_on:
+      - postgres
     environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB:-all_users}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
       FREECURRENCYAPI_API_KEY: ${FREECURRENCYAPI_API_KEY}
+      GCS_BUCKET_NAME: ${GCS_BUCKET_NAME}
+      GOOGLE_APPLICATION_CREDENTIALS: ${GOOGLE_APPLICATION_CREDENTIALS}
+      INGEST_FX_SCHEDULE: ${INGEST_FX_SCHEDULE}
+      UPDATE_USERS_SCHEDULE: ${UPDATE_USERS_SCHEDULE:-*/5 * * * *}
+    volumes:
+      - batch-cron-logs:/var/log
+      # Bind-mount host credentials so ingest_fx (run in-process) can read GCS key
+      - ./credentials:/app/credentials:ro
+    networks:
+      - default
+    restart: unless-stopped
 
 volumes:
   pgdata:
+  batch-cron-logs:

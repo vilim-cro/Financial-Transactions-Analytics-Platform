@@ -1,3 +1,6 @@
+-- Grant REPLICATION privilege to postgres user for CDC
+ALTER USER postgres WITH REPLICATION;
+
 CREATE TABLE users (
     user_id UUID PRIMARY KEY,
     first_name TEXT,
