@@ -1,0 +1,81 @@
+version: 2
+
+models:
+  - name: dim_users_history
+    columns:
+      - name: user_version_id
+        tests:
+          - not_null
+          - unique
+      - name: user_id
+        tests:
+          - not_null
+      - name: dbt_valid_from
+        tests:
+          - not_null
+
+  - name: dim_users_current
+    columns:
+      - name: user_id
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_merchants
+    columns:
+      - name: merchant_name
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_date
+    columns:
+      - name: date_key
+        tests:
+          - not_null
+          - unique
+      - name: date_day
+        tests:
+          - not_null
+          - unique
+
+  - name: dim_time
+    columns:
+      - name: time_key
+        tests:
+          - not_null
+          - unique
+
+  - name: fct_transactions
+    columns:
+      - name: transaction_id
+        tests:
+          - not_null
+          - unique
+      - name: user_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_users_current')
+                field: user_id
+      - name: merchant_name
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_merchants')
+                field: merchant_name
+      - name: date_key
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_key
+      - name: time_key
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_time')
+                field: time_key

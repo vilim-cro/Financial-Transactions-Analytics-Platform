@@ -1,0 +1,12 @@
+version: 2
+
+models:
+  - name: int_transactions_fx_enriched
+    columns:
+      - name: transaction_id
+        tests:
+          - not_null
+          - unique
+
+      - name: amount_usd
+        description: "Transaction amount normalized to USD when FX rate is available."
