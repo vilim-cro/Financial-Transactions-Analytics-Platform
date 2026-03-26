@@ -1,0 +1,18 @@
+version: 2
+
+sources:
+  - name: raw_clean
+    schema: raw_clean
+    tables:
+      - name: transactions
+        description: "Cleaned transaction events used as input for staging models."
+
+      - name: fx_rates
+        description: "Foreign exchange rates fetched from FreeCurrencyAPI (timestamp, base_currency, currency, rate)."
+
+      - name: merchants
+        description: "Merchant reference data (name, latitude, longitude, zipcode) ingested from Postgres/CSV and cleaned."
+
+      - name: users
+        description: "Change-log / CDC-style user records, including Airbyte metadata."
+

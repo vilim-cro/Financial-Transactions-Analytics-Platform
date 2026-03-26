@@ -1,0 +1,80 @@
+version: 2
+
+models:
+  - name: stg_transactions
+    columns:
+      - name: user_id
+        tests:
+          - not_null
+
+      - name: original_amount
+        tests:
+          - not_null
+
+      - name: currency
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["DKK", "NOK", "SEK", "EUR", "USD"]
+
+      - name: transaction_id
+        tests:
+          - not_null
+          - unique
+
+      - name: transaction_datetime_UTC
+        tests:
+          - not_null
+
+  - name: stg_fx_rates
+    columns:
+      - name: datetime_fetched_UTC
+        tests:
+          - not_null
+
+      - name: base_currency
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["DKK", "NOK", "SEK", "EUR", "USD"]
+
+      - name: transaction_currency
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["DKK", "NOK", "SEK", "EUR", "USD"]
+
+  - name: stg_merchants
+    columns:
+      - name: raw_loaded_at
+        tests:
+          - not_null
+
+      - name: merchant_name
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_users_changes
+    columns:
+      - name: user_id
+        tests:
+          - not_null
+
+      - name: first_name
+        tests:
+          - not_null
+
+      - name: last_name
+        tests:
+          - not_null
+
+      - name: gender
+        tests:
+          - accepted_values:
+              arguments:
+                values: ["Male", "Female"]
+
