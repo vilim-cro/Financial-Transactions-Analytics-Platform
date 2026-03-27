@@ -21,6 +21,7 @@ from config import (
     KAFKA_TOPIC,
     LOG_FORMAT,
     LOG_LEVEL,
+    PRODUCE_SPEED,
 )
 
 # Setup logging
@@ -151,7 +152,9 @@ def calculate_sleep_time(df: pd.DataFrame, current_idx: int) -> float:
     if current_idx + 1 >= len(df):
         return 0.0
     
-    return max(0.0, df.iloc[current_idx + 1]["unix_time"] - df.iloc[current_idx]["unix_time"])
+    base_sleep = max(0.0, df.iloc[current_idx + 1]["unix_time"] - df.iloc[current_idx]["unix_time"])
+    speed = PRODUCE_SPEED if PRODUCE_SPEED > 0 else 1.0
+    return base_sleep / speed
 
 
 def main() -> None:

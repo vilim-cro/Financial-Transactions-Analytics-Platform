@@ -1,0 +1,131 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "6c4e19e0eb7ff1e30139",
+  "position": {
+    "x": 366,
+    "y": 370,
+    "z": 5000,
+    "height": 350,
+    "width": 356,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "pieChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_time"
+                    }
+                  },
+                  "Property": "part_of_day"
+                }
+              },
+              "queryRef": "dim_time.part_of_day",
+              "nativeQueryRef": "Part of day",
+              "active": true,
+              "displayName": "Part of day"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mart_kpi_hourly"
+                        }
+                      },
+                      "Property": "amount_usd_fraud_total"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(mart_kpi_hourly.amount_usd_fraud_total)",
+              "nativeQueryRef": "Fraud USD Amount by Part of Day",
+              "displayName": "Fraud USD Amount by Part of Day"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "mart_kpi_hourly"
+                      }
+                    },
+                    "Property": "amount_usd_fraud_total"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "labels": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "labelPrecision": {
+              "expr": {
+                "Literal": {
+                  "Value": "1L"
+                }
+              }
+            },
+            "percentageLabelPrecision": {
+              "expr": {
+                "Literal": {
+                  "Value": "1L"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Share of fraud transaction volume by part of day'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

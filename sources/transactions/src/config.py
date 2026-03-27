@@ -16,6 +16,7 @@ EVENTS_CSV_FILE = Path("credit_card_transactions_events.csv")
 
 # Processing configuration
 CHECKPOINT_INTERVAL = 50  # Save checkpoint every N events
+PRODUCE_SPEED = float(os.getenv("PRODUCE_SPEED", "100"))  # sleep_time is divided by this value
 
 # Exchange rates to USD
 EXCHANGE_RATES = {

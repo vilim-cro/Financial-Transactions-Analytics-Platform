@@ -1,0 +1,189 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "a70186df834b207ed632",
+  "position": {
+    "x": 722.72040302267,
+    "y": 4.5340050377833752,
+    "z": 1000,
+    "height": 355.4659949622166,
+    "width": 356.37279596977328,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "mart_kpi_currency_daily"
+                    }
+                  },
+                  "Property": "currency"
+                }
+              },
+              "queryRef": "mart_kpi_currency_daily.currency",
+              "nativeQueryRef": "currency",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mart_kpi_currency_daily"
+                        }
+                      },
+                      "Property": "distinct_users"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(mart_kpi_currency_daily.distinct_users)",
+              "nativeQueryRef": "Num of distinct users",
+              "displayName": "Num of distinct users"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mart_kpi_currency_daily"
+                        }
+                      },
+                      "Property": "distinct_merchants"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(mart_kpi_currency_daily.distinct_merchants)",
+              "nativeQueryRef": "Num of distinct merchants",
+              "displayName": "Num of distinct merchants"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "mart_kpi_currency_daily"
+                      }
+                    },
+                    "Property": "distinct_users"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "valueAxis": [
+        {
+          "properties": {
+            "titleText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Number of users and merchants'"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "categoryAxis": [
+        {
+          "properties": {
+            "titleText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Currency'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "legend": [
+        {
+          "properties": {
+            "titleText": {
+              "expr": {
+                "Literal": {
+                  "Value": "''"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "labels": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Number of users and merchants by currency'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

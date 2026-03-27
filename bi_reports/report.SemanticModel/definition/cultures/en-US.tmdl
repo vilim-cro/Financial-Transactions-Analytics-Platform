@@ -1,0 +1,53 @@
+cultureInfo en-US
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "dim_time.hour_24": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_time",
+			          "ConceptualProperty": "hour_24"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Hour of Day": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "dim_time.part_of_day": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "dim_time",
+			          "ConceptualProperty": "part_of_day"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Part of day": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

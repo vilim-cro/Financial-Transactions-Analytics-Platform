@@ -1,0 +1,164 @@
+table dim_users_history
+	lineageTag: e553311f-a019-4780-b857-188549b7dbab
+
+	column user_version_id
+		dataType: string
+		lineageTag: 2208cb71-be41-40a4-8ca4-d925df380dc3
+		summarizeBy: none
+		sourceColumn: user_version_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column user_id
+		dataType: string
+		lineageTag: 96e2ff51-e000-4ce4-8050-403e2cea7133
+		summarizeBy: none
+		sourceColumn: user_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_name
+		dataType: string
+		lineageTag: 9a00fd53-254e-4ddb-8978-3005aef2dba7
+		summarizeBy: none
+		sourceColumn: first_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_name
+		dataType: string
+		lineageTag: 7c0a6af2-bfb1-4f39-86da-ff9219d1d683
+		summarizeBy: none
+		sourceColumn: last_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		lineageTag: a8421557-e879-44e5-b425-c65173d64747
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column address
+		dataType: string
+		lineageTag: a59f2be1-9f97-4046-b018-1e5852491a2c
+		summarizeBy: none
+		sourceColumn: address
+
+		annotation SummarizationSetBy = Automatic
+
+	column city_name
+		dataType: string
+		lineageTag: 3810128f-05dd-4b0f-9d4d-afe530df7074
+		summarizeBy: none
+		sourceColumn: city_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column zip_code
+		dataType: int64
+		formatString: 0
+		lineageTag: b751ea34-c497-4373-86d8-4ad1fec57bf3
+		summarizeBy: sum
+		sourceColumn: zip_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column latitude
+		dataType: double
+		lineageTag: ae8cff12-f846-4f7b-963b-95db1b1cf76a
+		summarizeBy: sum
+		sourceColumn: latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column longitude
+		dataType: double
+		lineageTag: 506921b4-6fce-4d04-b2ea-3025fa30e327
+		summarizeBy: sum
+		sourceColumn: longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column date_of_birth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3febac00-bb9f-4d4e-b1ab-9c97920d6716
+		summarizeBy: none
+		sourceColumn: date_of_birth
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column job
+		dataType: string
+		lineageTag: c5319420-0f62-44f5-ad67-51cadf2f0edd
+		summarizeBy: none
+		sourceColumn: job
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: d413035b-9167-4510-ad57-41b36ac1b1b5
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column raw_loaded_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: abbf03ca-293e-48bc-bac3-18bdbafbb4e9
+		summarizeBy: none
+		sourceColumn: raw_loaded_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column dbt_valid_from
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2ca53cb0-6363-44ee-bcb9-9426df089aa9
+		summarizeBy: none
+		sourceColumn: dbt_valid_from
+
+		annotation SummarizationSetBy = Automatic
+
+	column dbt_valid_to
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8e449d4a-3fa2-4efd-b24c-f4b4002bbe45
+		summarizeBy: none
+		sourceColumn: dbt_valid_to
+
+		annotation SummarizationSetBy = Automatic
+
+	column full_name
+		dataType: string
+		lineageTag: 6eda350b-f6e4-4758-b35b-8211aa702308
+		summarizeBy: none
+		sourceColumn: full_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_users_history = m
+		mode: directQuery
+		source =
+				let
+				    Source = GoogleBigQuery.Database(),
+				    #"crypto-minutia-490711-g8" = Source{[Name="crypto-minutia-490711-g8"]}[Data],
+				    analytics_Schema = #"crypto-minutia-490711-g8"{[Name="analytics",Kind="Schema"]}[Data],
+				    dim_users_history_Table = analytics_Schema{[Name="dim_users_history",Kind="Table"]}[Data]
+				in
+				    dim_users_history_Table
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,110 @@
+table mart_kpi_hourly
+	lineageTag: 6245a730-3047-42ef-843d-4a66580996c1
+
+	column date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 98c1db42-0198-4375-9737-de99f188a808
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column txn_count
+		dataType: int64
+		formatString: 0
+		lineageTag: f0c1ff28-9ddb-4f04-b3c4-3c66843204c3
+		summarizeBy: sum
+		sourceColumn: txn_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column fraud_txn_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 15cff3f3-3c6e-4237-92fe-d4ab472913d1
+		summarizeBy: sum
+		sourceColumn: fraud_txn_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column fraud_rate
+		dataType: double
+		lineageTag: 5e63b8f6-13c8-47ef-aa65-f874cd835810
+		summarizeBy: sum
+		sourceColumn: fraud_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column amount_usd_total
+		dataType: double
+		lineageTag: e00c6cd7-27e2-4c94-815b-1c3ac0b0613c
+		summarizeBy: sum
+		sourceColumn: amount_usd_total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column amount_usd_avg
+		dataType: double
+		lineageTag: c5f2f8c6-92b8-470e-aeb2-c7ff4de3d37b
+		summarizeBy: sum
+		sourceColumn: amount_usd_avg
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column amount_usd_fraud_total
+		dataType: double
+		lineageTag: 9cafb161-8057-40c5-af90-242dd55201b7
+		summarizeBy: sum
+		sourceColumn: amount_usd_fraud_total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column distinct_users
+		dataType: int64
+		formatString: 0
+		lineageTag: 9af5012e-7fce-47f5-8e43-d05c425dc11c
+		summarizeBy: sum
+		sourceColumn: distinct_users
+
+		annotation SummarizationSetBy = Automatic
+
+	column distinct_merchants
+		dataType: int64
+		formatString: 0
+		lineageTag: bc9594ca-7952-4c69-aafa-5d68133efa45
+		summarizeBy: sum
+		sourceColumn: distinct_merchants
+
+		annotation SummarizationSetBy = Automatic
+
+	column time_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 3ca41671-4cad-4984-86d0-5ac0b3d90fd2
+		summarizeBy: none
+		sourceColumn: time_key
+
+		annotation SummarizationSetBy = Automatic
+
+	partition mart_kpi_hourly = m
+		mode: directQuery
+		source =
+				let
+				    Source = GoogleBigQuery.Database(),
+				    #"crypto-minutia-490711-g8" = Source{[Name="crypto-minutia-490711-g8"]}[Data],
+				    analytics_Schema = #"crypto-minutia-490711-g8"{[Name="analytics",Kind="Schema"]}[Data],
+				    mart_kpi_hourly_Table = analytics_Schema{[Name="mart_kpi_hourly",Kind="Table"]}[Data]
+				in
+				    mart_kpi_hourly_Table
+
+	annotation PBI_ResultType = Table
+

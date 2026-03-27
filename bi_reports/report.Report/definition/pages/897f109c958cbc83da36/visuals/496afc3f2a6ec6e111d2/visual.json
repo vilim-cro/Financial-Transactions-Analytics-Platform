@@ -1,0 +1,150 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "496afc3f2a6ec6e111d2",
+  "position": {
+    "x": 0,
+    "y": 370,
+    "z": 4000,
+    "height": 350,
+    "width": 356,
+    "tabOrder": 2000
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_time"
+                    }
+                  },
+                  "Property": "hour_24"
+                }
+              },
+              "queryRef": "dim_time.hour_24",
+              "nativeQueryRef": "Hour of Day",
+              "active": true,
+              "displayName": "Hour of Day"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mart_kpi_hourly"
+                        }
+                      },
+                      "Property": "amount_usd_total"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(mart_kpi_hourly.amount_usd_total)",
+              "nativeQueryRef": "Total USD",
+              "displayName": "Total USD"
+            },
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mart_kpi_hourly"
+                        }
+                      },
+                      "Property": "amount_usd_fraud_total"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(mart_kpi_hourly.amount_usd_fraud_total)",
+              "nativeQueryRef": "Fraud USD",
+              "displayName": "Fraud USD"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Aggregation": {
+                "Expression": {
+                  "Column": {
+                    "Expression": {
+                      "SourceRef": {
+                        "Entity": "mart_kpi_hourly"
+                      }
+                    },
+                    "Property": "amount_usd_total"
+                  }
+                },
+                "Function": 0
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "valueAxis": [
+        {
+          "properties": {
+            "titleText": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Total transaction amount'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "visualTooltip": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Transaction amount by hour of day'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

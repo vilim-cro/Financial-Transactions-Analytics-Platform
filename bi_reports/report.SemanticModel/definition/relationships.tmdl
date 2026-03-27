@@ -1,0 +1,45 @@
+relationship d17b620f-0edd-9fc7-2481-bfb59f2b82ad
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: mart_kpi_daily.date_key
+	toColumn: dim_date.date_key
+
+relationship a05a8cb3-6e6a-ff25-cf83-34930354f80c
+	fromColumn: mart_kpi_user_daily.date_key
+	toColumn: dim_date.date_key
+
+relationship 09b8ffd2-5a2e-fef5-7f94-b096343f5bb9
+	fromColumn: mart_kpi_user_daily.user_id
+	toColumn: dim_users_current.user_id
+
+relationship 2e4d1b57-d095-8d35-28d8-937bad14d25a
+	fromColumn: mart_kpi_merchant_daily.date_key
+	toColumn: dim_date.date_key
+
+relationship 679be5c0-9c6b-374f-6159-0bc68b704f03
+	fromColumn: mart_kpi_currency_daily.date_key
+	toColumn: dim_date.date_key
+
+relationship f1fb898b-480e-b9de-9d64-5c3d8c8276da
+	fromColumn: mart_kpi_merchant_overall.first_date_key
+	toColumn: dim_date.date_key
+
+relationship ff528c04-31f8-6d69-6ab5-7ccfd7ec6185
+	isActive: false
+	fromColumn: mart_kpi_merchant_overall.last_date_key
+	toColumn: dim_date.date_key
+
+relationship 21f5aa8a-e2f1-e52b-5be5-f104ea952298
+	fromColumn: mart_kpi_hourly.date_key
+	toColumn: dim_date.date_key
+
+relationship e36ad8d2-df63-6726-8297-b6d8d329a914
+	fromColumn: mart_kpi_hourly.time_key
+	toColumn: dim_time.time_key
+
+relationship 54d57636-81be-0969-c41d-8893c885662f
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: dim_merchants.merchant_name
+	toColumn: mart_kpi_merchant_overall.merchant_name
+

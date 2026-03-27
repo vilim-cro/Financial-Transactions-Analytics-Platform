@@ -1,0 +1,137 @@
+version: 2
+
+models:
+  - name: mart_kpi_daily
+    description: "Daily dashboard KPIs aggregated from transaction fact using USD-normalized amounts."
+    columns:
+      - name: date_key
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_key
+
+  - name: mart_kpi_user_daily
+    description: "Daily per-user dashboard KPIs aggregated from transaction fact using USD-normalized amounts."
+    columns:
+      - name: date_user_key
+        description: "Surrogate key for one row per (date_key, user_id)."
+        tests:
+          - not_null
+          - unique
+
+      - name: date_key
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_key
+
+      - name: user_id
+        tests:
+          - not_null
+
+  - name: mart_kpi_merchant_daily
+    description: "Daily per-merchant dashboard KPIs aggregated from transaction fact using USD-normalized amounts."
+    columns:
+      - name: date_merchant_key
+        description: "Surrogate key for one row per (date_key, merchant_name)."
+        tests:
+          - not_null
+          - unique
+
+      - name: date_key
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_key
+
+      - name: merchant_name
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_merchants')
+                field: merchant_name
+
+  - name: mart_kpi_merchant_overall
+    description: "Lifetime per-merchant dashboard KPIs aggregated from transaction fact."
+    columns:
+      - name: merchant_name
+        tests:
+          - not_null
+          - unique
+          - relationships:
+              arguments:
+                to: ref('dim_merchants')
+                field: merchant_name
+
+  - name: mart_kpi_currency_daily
+    description: "Daily per-currency dashboard KPIs aggregated from transaction fact."
+    columns:
+      - name: date_currency_key
+        description: "Surrogate key for one row per (date_key, currency)."
+        tests:
+          - not_null
+          - unique
+
+      - name: date_key
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_key
+
+      - name: currency
+        tests:
+          - not_null
+
+  - name: mart_kpi_hourly
+    description: "Daily per-hour dashboard KPIs aggregated from transaction fact."
+    columns:
+      - name: date_key
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_key
+
+      - name: time_key
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_time')
+                field: time_key
+
+  - name: mart_kpi_user_segments_daily
+    description: "Daily user-segment dashboard KPIs grouped by gender and age band."
+    columns:
+      - name: date_user_segment_key
+        description: "Surrogate key for one row per (date_key, gender, age_band)."
+        tests:
+          - not_null
+          - unique
+
+      - name: date_key
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_date')
+                field: date_key
+
+      - name: gender
+        tests:
+          - not_null
+
+      - name: age_band
+        tests:
+          - not_null

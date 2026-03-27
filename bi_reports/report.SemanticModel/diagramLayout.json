@@ -1,0 +1,191 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 3693.474806965819,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 5321.0528909873083,
+            "y": 400.0900796460437
+          },
+          "nodeIndex": "mart_kpi_daily",
+          "nodeLineageTag": "1a4b35bc-1260-4122-896e-46c2226bc6f4",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 4759.945459336489,
+            "y": 382.52231116826545
+          },
+          "nodeIndex": "mart_kpi_user_daily",
+          "nodeLineageTag": "a57d1335-8dbb-49ef-b30e-887241cb5f3c",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 5101.9950307016288,
+            "y": 2.2239669253968373
+          },
+          "nodeIndex": "dim_date",
+          "nodeLineageTag": "b6b6607e-eb61-45d6-9b19-be223bc3b12b",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 3976,
+            "y": 50
+          },
+          "nodeIndex": "dim_merchants",
+          "nodeLineageTag": "e2fcde2c-40b3-4500-8d63-9c60f09c9d5c",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 4260,
+            "y": 14
+          },
+          "nodeIndex": "dim_time",
+          "nodeLineageTag": "caeff7fd-f7f1-4de8-bc36-c48162a7f481",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 4544,
+            "y": 0
+          },
+          "nodeIndex": "dim_users_current",
+          "nodeLineageTag": "ae9283ca-e07e-4676-8ead-4b22f4daa54d",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 4828,
+            "y": 0
+          },
+          "nodeIndex": "dim_users_history",
+          "nodeLineageTag": "e553311f-a019-4780-b857-188549b7dbab",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 1420,
+            "y": 137.32995764325807
+          },
+          "nodeIndex": "fct_transactions",
+          "nodeLineageTag": "f625aa8c-81f6-4fc0-bf98-a316cd2ce3cd",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 1704,
+            "y": 137.32995764325807
+          },
+          "nodeIndex": "int_transactions_fx_enriched",
+          "nodeLineageTag": "2894e318-31da-47b9-a782-1f17867b68fc",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 4446.595436026264,
+            "y": 391.97417060120227
+          },
+          "nodeIndex": "mart_kpi_currency_daily",
+          "nodeLineageTag": "9f0054c1-983b-474d-bea8-c0e932b9b044",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 3868.1404859841664,
+            "y": 408.653922541679
+          },
+          "nodeIndex": "mart_kpi_hourly",
+          "nodeLineageTag": "6245a730-3047-42ef-843d-4a66580996c1",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 12
+        },
+        {
+          "location": {
+            "x": 5078.4227104119718,
+            "y": 437.56549257183855
+          },
+          "nodeIndex": "mart_kpi_merchant_daily",
+          "nodeLineageTag": "825620b1-f04c-48d5-baf4-deba29fce53a",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 4180.3842895635244,
+            "y": 360.8386336456457
+          },
+          "nodeIndex": "mart_kpi_merchant_overall",
+          "nodeLineageTag": "fea8c2ef-2c0b-4aba-9110-dabdd1a7e960",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 13
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 89.929394954606948,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

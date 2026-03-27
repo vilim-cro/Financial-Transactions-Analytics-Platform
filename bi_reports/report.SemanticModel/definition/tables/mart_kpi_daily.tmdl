@@ -1,0 +1,119 @@
+table mart_kpi_daily
+	lineageTag: 1a4b35bc-1260-4122-896e-46c2226bc6f4
+
+	measure 'Fraud Rate' =
+			
+			DIVIDE(
+				SUM('mart_kpi_daily'[amount_usd_fraud_total]),
+				SUM('mart_kpi_daily'[amount_usd_total])
+			)
+		lineageTag: e9b5f2c3-4214-48ec-83dd-3157ea984bb9
+
+		extendedProperty MeasureTemplate =
+				{
+				  "version": 0,
+				  "daxTemplateName": "MathematicalDivision"
+				}
+
+		changedProperty = FormatString
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 2b283366-fbd6-49a9-a946-817517d222b1
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column txn_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 8e12b73e-3f19-4f29-b00e-1702e717e6a8
+		summarizeBy: sum
+		sourceColumn: txn_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column fraud_txn_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 92db7efb-d64f-4ea8-b8a7-1d28f4fca4b0
+		summarizeBy: sum
+		sourceColumn: fraud_txn_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column fraud_rate
+		dataType: double
+		lineageTag: c85bd470-49c7-40e7-b83e-bb7471805ef4
+		summarizeBy: sum
+		sourceColumn: fraud_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column amount_usd_total
+		dataType: double
+		lineageTag: 249a51eb-e2dc-45d3-aa22-9ffec1dc96e2
+		summarizeBy: sum
+		sourceColumn: amount_usd_total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column amount_usd_avg
+		dataType: double
+		lineageTag: 677814cd-b8ee-445d-82d4-dcc4230a8d6d
+		summarizeBy: sum
+		sourceColumn: amount_usd_avg
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column amount_usd_fraud_total
+		dataType: double
+		lineageTag: e7131bcf-506e-4dc7-8772-53e0aa3b9aa4
+		summarizeBy: sum
+		sourceColumn: amount_usd_fraud_total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column distinct_users
+		dataType: int64
+		formatString: 0
+		lineageTag: e0e7d1ac-a598-43f3-a0fb-134834422643
+		summarizeBy: sum
+		sourceColumn: distinct_users
+
+		annotation SummarizationSetBy = Automatic
+
+	column distinct_merchants
+		dataType: int64
+		formatString: 0
+		lineageTag: 7a981355-879f-4eb2-8501-3ef3f225a4d0
+		summarizeBy: sum
+		sourceColumn: distinct_merchants
+
+		annotation SummarizationSetBy = Automatic
+
+	partition mart_kpi_daily = m
+		mode: directQuery
+		source =
+				let
+				    Source = GoogleBigQuery.Database(),
+				    #"crypto-minutia-490711-g8" = Source{[Name="crypto-minutia-490711-g8"]}[Data],
+				    analytics_Schema = #"crypto-minutia-490711-g8"{[Name="analytics",Kind="Schema"]}[Data],
+				    mart_kpi_daily_Table = analytics_Schema{[Name="mart_kpi_daily",Kind="Table"]}[Data]
+				in
+				    mart_kpi_daily_Table
+
+	annotation PBI_ResultType = Table
+

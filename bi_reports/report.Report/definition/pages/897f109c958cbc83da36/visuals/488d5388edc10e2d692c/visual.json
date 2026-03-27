@@ -1,0 +1,109 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "488d5388edc10e2d692c",
+  "position": {
+    "x": 722.72040302267,
+    "y": 369.97481108312343,
+    "z": 5002,
+    "height": 350.02518891687657,
+    "width": 545.89420654911839,
+    "tabOrder": 4002
+  },
+  "visual": {
+    "visualType": "map",
+    "query": {
+      "queryState": {
+        "Size": {
+          "projections": [
+            {
+              "field": {
+                "Aggregation": {
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "mart_kpi_merchant_overall"
+                        }
+                      },
+                      "Property": "amount_usd_total"
+                    }
+                  },
+                  "Function": 0
+                }
+              },
+              "queryRef": "Sum(mart_kpi_merchant_overall.amount_usd_total)",
+              "nativeQueryRef": "Sum of amount_usd_total"
+            }
+          ]
+        },
+        "X": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_merchants"
+                    }
+                  },
+                  "Property": "merchant_longitude"
+                }
+              },
+              "queryRef": "dim_merchants.merchant_longitude",
+              "nativeQueryRef": "merchant_longitude"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_merchants"
+                    }
+                  },
+                  "Property": "merchant_latitude"
+                }
+              },
+              "queryRef": "dim_merchants.merchant_latitude",
+              "nativeQueryRef": "merchant_latitude"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "bubbles": [
+        {
+          "properties": {
+            "bubbleSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "-12L"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Merchant map by volume'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -5,6 +5,7 @@ select
     user_id,
     first_name,
     last_name,
+    full_name,
     gender,
     address,
     city_name,

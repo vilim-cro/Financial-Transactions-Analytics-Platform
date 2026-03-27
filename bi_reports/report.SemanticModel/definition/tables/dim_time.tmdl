@@ -1,0 +1,88 @@
+table dim_time
+	lineageTag: caeff7fd-f7f1-4de8-bc36-c48162a7f481
+
+	column time_key
+		dataType: int64
+		formatString: 0
+		lineageTag: f607a469-4ee4-4d6a-bc43-3060cceecc74
+		summarizeBy: none
+		sourceColumn: time_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column time_of_day
+		dataType: dateTime
+		formatString: Long Time
+		lineageTag: d363dd65-fe16-474a-a0c3-f8a982c28e12
+		summarizeBy: none
+		sourceColumn: time_of_day
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Time
+
+	column hour_24
+		dataType: int64
+		formatString: 0
+		lineageTag: 90508ef1-b859-44bb-a3be-4d7eebbbfa55
+		summarizeBy: none
+		sourceColumn: hour_24
+
+		annotation SummarizationSetBy = Automatic
+
+	column minute_number
+		dataType: int64
+		formatString: 0
+		lineageTag: 9735c24a-bd25-4751-8d73-4ebc5a45a785
+		summarizeBy: none
+		sourceColumn: minute_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column second_number
+		dataType: int64
+		formatString: 0
+		lineageTag: 18c1e78a-aa0a-4b9e-b95b-9dbd93204c3f
+		summarizeBy: none
+		sourceColumn: second_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column hour_bucket
+		dataType: string
+		lineageTag: f41545d4-d7e3-4f85-9abe-8597dc68c5f5
+		summarizeBy: none
+		sourceColumn: hour_bucket
+
+		annotation SummarizationSetBy = Automatic
+
+	column part_of_day
+		dataType: string
+		lineageTag: 57960ae2-9297-4251-a0dd-c1d613f72cb3
+		summarizeBy: none
+		sourceColumn: part_of_day
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_business_hours
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: e36913b1-67b9-46e4-9210-426bf81bb905
+		summarizeBy: none
+		sourceColumn: is_business_hours
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_time = m
+		mode: directQuery
+		source =
+				let
+				    Source = GoogleBigQuery.Database(),
+				    #"crypto-minutia-490711-g8" = Source{[Name="crypto-minutia-490711-g8"]}[Data],
+				    analytics_Schema = #"crypto-minutia-490711-g8"{[Name="analytics",Kind="Schema"]}[Data],
+				    dim_time_Table = analytics_Schema{[Name="dim_time",Kind="Table"]}[Data]
+				in
+				    dim_time_Table
+
+	annotation PBI_ResultType = Table
+

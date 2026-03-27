@@ -1,0 +1,155 @@
+table dim_users_current
+	lineageTag: ae9283ca-e07e-4676-8ead-4b22f4daa54d
+
+	column user_version_id
+		dataType: string
+		lineageTag: 4ba9f3e5-bbbf-4839-a136-5ecd02184a65
+		summarizeBy: none
+		sourceColumn: user_version_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column user_id
+		dataType: string
+		lineageTag: 281766fa-a7fb-47ec-b34a-39249cc99828
+		summarizeBy: none
+		sourceColumn: user_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_name
+		dataType: string
+		lineageTag: e3c7b83a-07d5-4717-a49f-49390970670a
+		summarizeBy: none
+		sourceColumn: first_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_name
+		dataType: string
+		lineageTag: ecb55054-22a9-4421-b10b-e7fe724d1b71
+		summarizeBy: none
+		sourceColumn: last_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		lineageTag: b425a295-9755-4ecd-a85d-27d4438ac714
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column address
+		dataType: string
+		lineageTag: b3ba28cd-9eea-44e1-a537-96f4598fc73f
+		summarizeBy: none
+		sourceColumn: address
+
+		annotation SummarizationSetBy = Automatic
+
+	column city_name
+		dataType: string
+		lineageTag: 88f853aa-e79f-40f9-8531-8cf33c23215b
+		summarizeBy: none
+		sourceColumn: city_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column zip_code
+		dataType: int64
+		formatString: 0
+		lineageTag: bca3cdeb-db28-4c9e-9216-986a3d394a77
+		summarizeBy: none
+		sourceColumn: zip_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column latitude
+		dataType: double
+		lineageTag: 5b563a57-3b39-4129-b3ed-f6b75e939262
+		summarizeBy: none
+		sourceColumn: latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column longitude
+		dataType: double
+		lineageTag: 945c825f-d1ab-463b-be5b-db7942d137fb
+		summarizeBy: none
+		sourceColumn: longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column date_of_birth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 3087af65-af5a-4d12-a2fc-5d647cb1843e
+		summarizeBy: none
+		sourceColumn: date_of_birth
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column job
+		dataType: string
+		lineageTag: e646818c-2aec-4c98-aa5c-943969fd29ed
+		summarizeBy: none
+		sourceColumn: job
+
+		annotation SummarizationSetBy = Automatic
+
+	column updated_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1c3e71e6-5773-45d4-9705-1b6cba846f07
+		summarizeBy: none
+		sourceColumn: updated_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column raw_loaded_at
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 1a4de8a9-1961-404a-bf36-121eaa7312ca
+		summarizeBy: none
+		sourceColumn: raw_loaded_at
+
+		annotation SummarizationSetBy = Automatic
+
+	column dbt_valid_from
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 9470da6c-2bff-44d2-9c9e-29ed65639649
+		summarizeBy: none
+		sourceColumn: dbt_valid_from
+
+		annotation SummarizationSetBy = Automatic
+
+	column full_name
+		dataType: string
+		lineageTag: acdf125c-50d4-440d-8a93-1a77af2730a3
+		summarizeBy: none
+		sourceColumn: full_name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_users_current = m
+		mode: directQuery
+		source =
+				let
+				    Source = GoogleBigQuery.Database(),
+				    #"crypto-minutia-490711-g8" = Source{[Name="crypto-minutia-490711-g8"]}[Data],
+				    analytics_Schema = #"crypto-minutia-490711-g8"{[Name="analytics",Kind="Schema"]}[Data],
+				    dim_users_current_Table = analytics_Schema{[Name="dim_users_current",Kind="Table"]}[Data]
+				in
+				    dim_users_current_Table
+
+	annotation PBI_ResultType = Table
+

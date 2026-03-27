@@ -1,0 +1,115 @@
+table dim_date
+	lineageTag: b6b6607e-eb61-45d6-9b19-be223bc3b12b
+
+	column date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 2df530d0-2d6e-435a-9b8d-11cfce731d0f
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_day
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1e915e53-c186-4750-8d62-6437a5d42193
+		summarizeBy: none
+		sourceColumn: date_day
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column year_number
+		dataType: int64
+		formatString: 0
+		lineageTag: feff3e7b-29eb-423c-b451-1e2dcbe10956
+		summarizeBy: sum
+		sourceColumn: year_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column quarter_number
+		dataType: int64
+		formatString: 0
+		lineageTag: 834408bd-fbf8-4445-aa4e-b0b026802738
+		summarizeBy: sum
+		sourceColumn: quarter_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_number
+		dataType: int64
+		formatString: 0
+		lineageTag: a1ee459e-82ba-468b-af0f-4301ad6eaa4e
+		summarizeBy: sum
+		sourceColumn: month_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column month_name
+		dataType: string
+		lineageTag: af3e4749-357f-4662-b817-8840c6da3fc7
+		summarizeBy: none
+		sourceColumn: month_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column iso_week_number
+		dataType: int64
+		formatString: 0
+		lineageTag: 8fa4cde0-29b8-4a77-994e-3e8be0015b16
+		summarizeBy: sum
+		sourceColumn: iso_week_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_of_month
+		dataType: int64
+		formatString: 0
+		lineageTag: 1d960bb0-6b50-4fdb-8975-627786b58640
+		summarizeBy: sum
+		sourceColumn: day_of_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_of_week
+		dataType: int64
+		formatString: 0
+		lineageTag: 72ca6af6-17f8-40ea-a3c8-4f31fed8b54f
+		summarizeBy: sum
+		sourceColumn: day_of_week
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_name
+		dataType: string
+		lineageTag: f217931e-a244-4fb2-b9b0-754b660c431b
+		summarizeBy: none
+		sourceColumn: day_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column iso_year_number
+		dataType: int64
+		formatString: 0
+		lineageTag: 845672b6-4141-4f33-9c8e-7f7105e7d973
+		summarizeBy: sum
+		sourceColumn: iso_year_number
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_date = m
+		mode: directQuery
+		source =
+				let
+				    Source = GoogleBigQuery.Database(),
+				    #"crypto-minutia-490711-g8" = Source{[Name="crypto-minutia-490711-g8"]}[Data],
+				    analytics_Schema = #"crypto-minutia-490711-g8"{[Name="analytics",Kind="Schema"]}[Data],
+				    dim_date_Table = analytics_Schema{[Name="dim_date",Kind="Table"]}[Data]
+				in
+				    dim_date_Table
+
+	annotation PBI_ResultType = Table
+

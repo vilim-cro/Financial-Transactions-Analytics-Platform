@@ -1,0 +1,140 @@
+table fct_transactions
+	lineageTag: f625aa8c-81f6-4fc0-bf98-a316cd2ce3cd
+
+	column transaction_id
+		dataType: string
+		lineageTag: 27786950-f9d4-4298-ae5e-88a436141c46
+		summarizeBy: none
+		sourceColumn: transaction_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column user_id
+		dataType: string
+		lineageTag: 0b84f607-c9fb-46c1-a220-e5e0f5b1a34f
+		summarizeBy: none
+		sourceColumn: user_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column user_version_id
+		dataType: string
+		lineageTag: 24a40d26-52f6-42ed-93df-3e47ae536d6d
+		summarizeBy: none
+		sourceColumn: user_version_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column merchant_name
+		dataType: string
+		lineageTag: 839a7571-8804-44bf-abf2-0f4861ae6256
+		summarizeBy: none
+		sourceColumn: merchant_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 3a48270d-0b9e-4828-be8d-ee78e522a8bb
+		summarizeBy: sum
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column time_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 600ca0a5-af37-4faf-ae55-a7cdd3d39544
+		summarizeBy: sum
+		sourceColumn: time_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column transaction_datetime_UTC
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 9bdccde1-8eb7-4f98-b443-7330540912ab
+		summarizeBy: none
+		sourceColumn: transaction_datetime_UTC
+
+		annotation SummarizationSetBy = Automatic
+
+	column unix_time_seconds
+		dataType: int64
+		formatString: 0
+		lineageTag: 86c549f8-dfc5-4973-b4e2-f89888c767e2
+		summarizeBy: sum
+		sourceColumn: unix_time_seconds
+
+		annotation SummarizationSetBy = Automatic
+
+	column currency
+		dataType: string
+		lineageTag: 26d83217-4175-4c7c-98b6-c568e8486786
+		summarizeBy: none
+		sourceColumn: currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column original_amount
+		dataType: double
+		lineageTag: 2ce33ec0-fb1f-47f7-a627-403d6d9b42ff
+		summarizeBy: sum
+		sourceColumn: original_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fx_rate_to_currency
+		dataType: double
+		lineageTag: 48af8089-8a1c-4f5b-98ab-b30787d64696
+		summarizeBy: sum
+		sourceColumn: fx_rate_to_currency
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fx_rate_timestamp_UTC
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2688820c-9913-4190-b6a7-7a39ff3f8a31
+		summarizeBy: none
+		sourceColumn: fx_rate_timestamp_UTC
+
+		annotation SummarizationSetBy = Automatic
+
+	column amount_usd
+		dataType: double
+		lineageTag: 62a41e0b-4e6d-45d5-b793-649a04354cc7
+		summarizeBy: sum
+		sourceColumn: amount_usd
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column is_fraud
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 6f6f77dd-78b4-4575-a997-03299841eb73
+		summarizeBy: none
+		sourceColumn: is_fraud
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fct_transactions = m
+		mode: directQuery
+		source =
+				let
+				    Source = GoogleBigQuery.Database(),
+				    #"crypto-minutia-490711-g8" = Source{[Name="crypto-minutia-490711-g8"]}[Data],
+				    analytics_Schema = #"crypto-minutia-490711-g8"{[Name="analytics",Kind="Schema"]}[Data],
+				    fct_transactions_Table = analytics_Schema{[Name="fct_transactions",Kind="Table"]}[Data]
+				in
+				    fct_transactions_Table
+
+	annotation PBI_ResultType = Table
+

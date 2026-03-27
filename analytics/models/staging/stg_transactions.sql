@@ -28,7 +28,18 @@ final as (
             is_fraud
         )
     from source
+),
+
+deduped as (
+    -- Ensure transaction_id uniqueness (dbt test enforces this).
+    -- If the same transaction is ingested multiple times, keep the latest record.
+    select *
+    from final
+    qualify row_number() over (
+        partition by transaction_id
+        order by transaction_datetime_UTC desc, unix_time_seconds desc
+    ) = 1
 )
 
 select *
-from final
+from deduped

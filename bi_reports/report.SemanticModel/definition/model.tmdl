@@ -1,0 +1,30 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["mart_kpi_user_daily","mart_kpi_daily","dim_time","dim_merchants","dim_date","dim_users_current","dim_users_history","fct_transactions","int_transactions_fx_enriched","mart_kpi_currency_daily","mart_kpi_hourly","mart_kpi_merchant_daily","mart_kpi_merchant_overall"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table mart_kpi_user_daily
+ref table mart_kpi_daily
+ref table dim_time
+ref table dim_merchants
+ref table dim_date
+ref table dim_users_current
+ref table dim_users_history
+ref table fct_transactions
+ref table int_transactions_fx_enriched
+ref table mart_kpi_currency_daily
+ref table mart_kpi_hourly
+ref table mart_kpi_merchant_daily
+ref table mart_kpi_merchant_overall
+
+ref cultureInfo en-US
+

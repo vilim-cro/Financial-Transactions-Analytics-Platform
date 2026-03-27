@@ -42,6 +42,7 @@ final as (
         user_id,
         first_name,
         last_name,
+        nullif(trim(concat(coalesce(first_name, ''), ' ', coalesce(last_name, ''))), '') as full_name,
         gender,
         address,
         city_name,
