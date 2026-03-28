@@ -1,0 +1,16 @@
+# Used when DBT_PROFILES_DIR points here (see Dockerfile).
+# Cloud Run: mount Secret Manager secret `dbt-bq-key` as a file and set
+# GOOGLE_APPLICATION_CREDENTIALS to that path (see Dockerfile default).
+
+analytics:
+  target: prod
+  outputs:
+    prod:
+      type: bigquery
+      method: service-account
+      project: "{{ env_var('DBT_GCP_PROJECT') }}"
+      dataset: "{{ env_var('DBT_BIGQUERY_DATASET') }}"
+      threads: 4
+      location: "{{ env_var('DBT_BIGQUERY_LOCATION', 'EU') }}"
+      priority: "{{ env_var('DBT_BIGQUERY_PRIORITY', 'interactive') }}"
+      keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}"

@@ -1,0 +1,16 @@
+steps:
+  # 1. Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'europe-north2-docker.pkg.dev/$PROJECT_ID/dbt-repo/dbt-fraud-job:latest', '.']
+
+  # 2. Push it to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'europe-north2-docker.pkg.dev/$PROJECT_ID/dbt-repo/dbt-fraud-job:latest']
+
+  # 3. Update the Cloud Run Job to use the new image
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args: ['run', 'jobs', 'update', 'dbt-fraud-analytics', '--image', 'europe-north2-docker.pkg.dev/$PROJECT_ID/dbt-repo/dbt-fraud-job:latest', '--region', 'europe-north2']
+
+images:
+  - 'europe-north2-docker.pkg.dev/$PROJECT_ID/dbt-repo/dbt-fraud-job:latest'
