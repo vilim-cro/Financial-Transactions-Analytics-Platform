@@ -1,7 +1,7 @@
 steps:
   # 1. Build the Docker image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'europe-north2-docker.pkg.dev/$PROJECT_ID/dbt-repo/dbt-fraud-job:latest', '.']
+    args: ['build', '-t', 'europe-north2-docker.pkg.dev/$PROJECT_ID/dbt-repo/dbt-fraud-job:latest', 'analytics/']
 
   # 2. Push it to Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
